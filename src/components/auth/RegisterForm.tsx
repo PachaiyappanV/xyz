@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
-import SocialAuth from "./SocialAuth";
+import { SocialAuth } from ".";
 
 const formSchema = z
   .object({

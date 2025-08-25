@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import { Settings, UsersRound } from "lucide-react";
 import {
@@ -18,16 +17,11 @@ import { cn } from "@/lib/utils";
 import { navMain, navSecondary } from "@/constants";
 import Link from "next/link";
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  // Note: I'm using state to show active item.
-  // IRL you should use the url/router.
+const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
   const [activeMain, setActiveMain] = useState("Dashboard");
   const [activeSecondary, setActiveSecondary] = useState("");
 
   const { setOpen, open } = useSidebar();
-  useEffect(() => {
-    setOpen(false);
-  }, []);
   useEffect(() => {
     if (activeMain === "Chat") {
       setActiveSecondary("Inbox");
@@ -44,9 +38,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       className="min-h-full max-h-full absolute *:data-[sidebar=sidebar]:flex-row "
       {...props}
     >
-      {/* This is the first sidebar */}
-      {/* We disable collapsible and adjust width to icon. */}
-      {/* This will make the sidebar appear as icons. */}
       <Sidebar
         collapsible="none"
         className="w-[calc(var(--sidebar-width-icon))]"
@@ -92,8 +83,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarContent>
       </Sidebar>
 
-      {/* This is the second sidebar */}
-      {/* We disable collapsible and let it fill remaining space */}
       <Sidebar collapsible="none" className="bg-blue-20 flex-1">
         {activeMain === "Chat" && (
           <SidebarContent>
@@ -169,4 +158,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </Sidebar>
     </Sidebar>
   );
-}
+};
+export default AppSidebar;

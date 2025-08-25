@@ -1,5 +1,4 @@
-import RegisterForm from "@/components/auth/RegisterForm";
-import RegisterLeft from "@/components/auth/RegisterLeft";
+import { RegisterForm, RegisterLeft } from "@/components/auth";
 
 export default function RegisterPage() {
   return (

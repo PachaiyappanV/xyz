@@ -1,11 +1,7 @@
 "use client";
-
-import Header from "@/components/Header";
-import SearchModal from "@/components/SearchModal";
-import { AppSidebar } from "@/components/AppSidebar";
+import { AppSidebar, Header, SearchModal } from "@/components/global";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import type React from "react";
-
 import { useState } from "react";
 
 type AppLayoutProps = {
@@ -19,6 +15,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       <Header onSearchClick={() => setIsSearchOpen(true)} />
       <div className="flex h-[92vh]">
         <SidebarProvider
+          defaultOpen={false}
           style={
             {
               "--sidebar-width": "300px",

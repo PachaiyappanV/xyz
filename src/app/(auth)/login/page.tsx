@@ -1,5 +1,4 @@
-import LoginForm from "@/components/auth/LoginForm";
-import LoginLeft from "@/components/auth/LoginLeft";
+import { LoginForm, LoginLeft } from "@/components/auth";
 
 export default function RegisterPage() {
   return (

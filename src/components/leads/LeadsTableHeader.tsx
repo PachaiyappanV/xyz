@@ -1,5 +1,5 @@
 import { leadsTableHeaders } from "@/constants";
-import LeadsFieldsDropdown from "./LeadsFieldsDropdown";
+import { LeadsFieldsDropdown } from ".";
 const LeadsTableHeader = () => {
   return (
     <thead className="bg-blue-10 border-b border-gray-200">

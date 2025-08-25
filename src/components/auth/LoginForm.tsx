@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import SocialAuth from "./SocialAuth";
+import { SocialAuth } from ".";
 
 const formSchema = z.object({
   email: z.email("Invalid email address"),

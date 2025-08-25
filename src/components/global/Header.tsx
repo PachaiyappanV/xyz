@@ -1,5 +1,4 @@
 "use client";
-
 import { Search, ChevronDown, User, LogOut, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Switch } from "./ui/switch";
+import { Switch } from "@/components/ui/switch";
 
 type HeaderProps = {
   onSearchClick: () => void;

@@ -1,6 +1,6 @@
 import { Filter, RefreshCw, Layers, ArrowDownWideNarrow } from "lucide-react";
 import { Button } from "../ui/button";
-import SearchBar from "../SearchBar";
+import { SearchBar } from "@/components/global";
 import { AddLeadsDropdown, LeadsSettingsDropdown } from ".";
 
 const LeadsTableControls = () => {

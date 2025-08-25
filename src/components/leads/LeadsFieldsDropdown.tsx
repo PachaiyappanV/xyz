@@ -39,11 +39,7 @@ const LeadsFieldsDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size={"sm"}
-          className="flex items-center gap-2"
-        >
+        <Button variant="ghost" size={"sm"} className="flex items-center gap-2">
           <SlidersVertical />
         </Button>
       </DropdownMenuTrigger>
