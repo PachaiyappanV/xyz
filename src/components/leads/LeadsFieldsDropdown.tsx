@@ -26,9 +26,15 @@ const LeadsFieldsDropdown = () => {
     "email",
   ]);
 
+  const maxSelection = 5;
+
   const toggleField = (field: string) => {
     setSelectedFields((prev) =>
-      prev.includes(field) ? prev.filter((f) => f !== field) : [...prev, field]
+      prev.includes(field)
+        ? prev.filter((f) => f !== field)
+        : prev.length < maxSelection
+        ? [...prev, field]
+        : prev
     );
   };
 
@@ -39,28 +45,39 @@ const LeadsFieldsDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size={"sm"} className="flex items-center gap-2">
+        <Button variant="ghost" size="sm" className="flex items-center gap-2">
           <SlidersVertical />
         </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-48 p-3 space-y-2">
-        {fieldOptions.map((field) => (
-          <div key={field} className="flex items-center space-x-2">
-            <Checkbox
-              id={field}
-              checked={selectedFields.includes(field)}
-              onCheckedChange={() => toggleField(field)}
-              className="data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600"
-            />
-            <Label
-              htmlFor={field}
-              className="capitalize font-normal cursor-pointer"
-            >
-              {field}
-            </Label>
-          </div>
-        ))}
+        {fieldOptions.map((field) => {
+          const isChecked = selectedFields.includes(field);
+          const isDisabled =
+            !isChecked && selectedFields.length >= maxSelection;
+
+          return (
+            <div key={field} className="flex items-center space-x-2">
+              <Checkbox
+                id={field}
+                checked={isChecked}
+                onCheckedChange={() => toggleField(field)}
+                disabled={isDisabled}
+                className={`data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600 ${
+                  isDisabled ? "cursor-not-allowed" : ""
+                }`}
+              />
+              <Label
+                htmlFor={field}
+                className={`capitalize font-normal cursor-pointer ${
+                  isDisabled ? "cursor-not-allowed text-gray-700" : ""
+                }`}
+              >
+                {field}
+              </Label>
+            </div>
+          );
+        })}
 
         <div className="pt-2">
           <Button
