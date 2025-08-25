@@ -1,11 +1,10 @@
-import { leadsTableHeaders } from "@/constants";
-import { LeadsFieldsDropdown } from ".";
-import { ArrowDownUp } from "lucide-react";
-const LeadsTableHeader = () => {
+import { TagsTableHeaders } from "@/constants";
+
+const TagsTableHeader = () => {
   return (
     <thead className="bg-blue-10 border-b border-gray-200">
       <tr>
-        {leadsTableHeaders.map((header, id) => (
+        {TagsTableHeaders.map((header, id) => (
           <th
             key={id}
             className=" px-6 py-3 text-left text-xs font-medium  text-gray-500 uppercase tracking-wider whitespace-nowrap"
@@ -18,14 +17,8 @@ const LeadsTableHeader = () => {
                 />{" "}
                 {header}
               </div>
-            ) : id === 6 ? (
-              <span className="flex items-center gap-1">
-                <LeadsFieldsDropdown />
-              </span>
             ) : (
-              <span className="flex cursor-pointer hover:text-black items-center gap-1 [&>svg]:w-[15px] [&>svg]:h-[15px]">
-                {header} <ArrowDownUp />
-              </span>
+              header
             )}
           </th>
         ))}
@@ -33,4 +26,4 @@ const LeadsTableHeader = () => {
     </thead>
   );
 };
-export default LeadsTableHeader;
+export default TagsTableHeader;

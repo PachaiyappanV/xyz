@@ -190,3 +190,42 @@ export const leadsTableHeaders = [
   "Actions",
   "",
 ];
+export const TagsTableHeaders = [
+  "Tag Name",
+  "Created By",
+  "Created At",
+  "Actions",
+];
+
+export const tags = [
+  {
+    name: "Tag 1",
+    createdBy: "John Doe",
+    createdAt: "2022-01-01",
+  },
+  {
+    name: "Tag 2",
+    createdBy: "Jane Doe",
+    createdAt: "2022-02-01",
+  },
+  {
+    name: "Tag 3",
+    createdBy: "Bob Smith",
+    createdAt: "2022-03-01",
+  },
+  {
+    name: "Tag 4",
+    createdBy: "Alice Johnson",
+    createdAt: "2022-04-01",
+  },
+  {
+    name: "Tag 5",
+    createdBy: "Charlie Brown",
+    createdAt: "2022-05-01",
+  },
+  {
+    name: "Tag 6",
+    createdBy: "Eve Green",
+    createdAt: "2022-06-01",
+  },
+];

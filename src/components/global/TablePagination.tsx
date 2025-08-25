@@ -10,12 +10,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const LeadsPagination = () => {
+const TablePagination = () => {
   const [recordsPerPage, setRecordsPerPage] = useState("20");
   const [page, setPage] = useState(1);
 
   const totalPages = 10;
-  const totalRecords = 1;
+  const totalRecords = 6;
 
   return (
     <div className="flex items-center justify-between w-full px-4 py-2 text-sm">
@@ -73,4 +73,4 @@ const LeadsPagination = () => {
     </div>
   );
 };
-export default LeadsPagination;
+export default TablePagination;

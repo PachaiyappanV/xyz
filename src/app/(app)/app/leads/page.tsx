@@ -1,10 +1,6 @@
 import { ContactRound } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  LeadsPagination,
-  LeadsTable,
-  LeadsTableControls,
-} from "@/components/leads";
+import { LeadsTable } from "@/components/leads";
 
 const LeadsPage = () => {
   return (
@@ -20,9 +16,7 @@ const LeadsPage = () => {
             <TabsTrigger value="follow-up">Follow Up</TabsTrigger>
           </TabsList>
           <TabsContent value="all" className="mt-2">
-            <LeadsTableControls />
             <LeadsTable />
-            <LeadsPagination />
           </TabsContent>
           <TabsContent value="follow-up">Follow up</TabsContent>
         </Tabs>

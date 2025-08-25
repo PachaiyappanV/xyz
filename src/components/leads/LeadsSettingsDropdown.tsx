@@ -7,8 +7,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Settings, History, Tag, Link2Off } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const LeadsSettingsDropdown = () => {
+  const router = useRouter();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -23,10 +25,14 @@ const LeadsSettingsDropdown = () => {
           <span>History</span>
         </DropdownMenuItem>
 
-        <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem
+          onClick={() => router.push("./leads/tags")}
+          className="cursor-pointer"
+        >
           <Tag />
           <span>Tags</span>
         </DropdownMenuItem>
+
         <DropdownMenuItem className="cursor-pointer">
           <Link2Off />
           <span>Field Collection</span>
