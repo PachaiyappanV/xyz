@@ -15,8 +15,10 @@ const LeadsTableHeader = () => {
                 <input
                   type="checkbox"
                   className="rounded border-gray-300 flex self-center"
-                />{" "}
-                {header}
+                />
+                <span className="flex cursor-pointer hover:text-black items-center gap-1 [&>svg]:w-[15px] [&>svg]:h-[15px]">
+                  {header} <ArrowDownUp />
+                </span>
               </div>
             ) : id === 6 ? (
               <span className="flex items-center gap-1">

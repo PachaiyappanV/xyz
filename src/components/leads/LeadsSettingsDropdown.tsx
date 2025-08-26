@@ -33,7 +33,10 @@ const LeadsSettingsDropdown = () => {
           <span>Tags</span>
         </DropdownMenuItem>
 
-        <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem
+          onClick={() => router.push("./leads/fields")}
+          className="cursor-pointer"
+        >
           <Link2Off />
           <span>Field Collection</span>
         </DropdownMenuItem>

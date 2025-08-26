@@ -229,3 +229,71 @@ export const tags = [
     createdAt: "2022-06-01",
   },
 ];
+
+export const fieldsTableHeaders = [
+  "",
+  "Label",
+  "Type",
+  "Status",
+  "Mandatory",
+  "Actions",
+];
+
+export const fields = [
+  {
+    label: "Phone",
+    type: "phone-number",
+    status: true,
+    mandatory: true,
+    custom: false,
+  },
+  {
+    label: "Name",
+    type: "text",
+    status: true,
+    mandatory: true,
+    custom: false,
+  },
+  {
+    label: "Email",
+    type: "email",
+    status: true,
+    mandatory: false,
+    custom: false,
+  },
+  {
+    label: "Created At",
+    type: "date",
+    status: true,
+    mandatory: true,
+    custom: false,
+  },
+  {
+    label: "Last Updated",
+    type: "date",
+    status: true,
+    mandatory: true,
+    custom: false,
+  },
+  {
+    label: "Follow Up",
+    type: "date",
+    status: true,
+    mandatory: false,
+    custom: false,
+  },
+  {
+    label: "Tags",
+    type: "text",
+    status: true,
+    mandatory: false,
+    custom: false,
+  },
+  {
+    label: "Age",
+    type: "text",
+    status: true,
+    mandatory: true,
+    custom: true,
+  },
+];
