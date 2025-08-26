@@ -3,3 +3,4 @@ export { default as SearchBar } from "./SearchBar";
 export { default as SearchModal } from "./SearchModal";
 export { default as Header } from "./Header";
 export { default as TablePagination } from "./TablePagination";
+export { default as DateField } from "./DateField";

@@ -1,4 +1,4 @@
-import { Filter, RefreshCw, Layers, ArrowDownWideNarrow } from "lucide-react";
+import { Filter, RefreshCw, Layers } from "lucide-react";
 import { Button } from "../ui/button";
 import { SearchBar } from "@/components/global";
 import { AddLeadsDropdown, LeadsSettingsDropdown } from ".";
@@ -15,10 +15,6 @@ const LeadsTableControls = () => {
         </Button>
       </div>
       <div className="flex gap-3 items-center justify-center">
-        <Button variant="outline" className="cursor-pointer">
-          <ArrowDownWideNarrow />
-          Sort
-        </Button>
         <Button variant="outline" className="cursor-pointer">
           <Filter />
           Filters

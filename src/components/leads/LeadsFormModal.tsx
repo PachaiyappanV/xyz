@@ -25,41 +25,57 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { useState } from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { DateField } from "../global";
 
 const leadSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().optional(),
-  company: z.string().min(1, "Company is required"),
-  value: z.string().optional(),
-  source: z.string().min(1, "Source is required"),
-  status: z.string().min(1, "Status is required"),
-  notes: z.string().optional(),
+  name: z.string().min(1, "Name is required"),
+  email: z.string().optional(),
+  phone: z.string().min(10, "Enter a valid phone number"),
+  countryCode: z.string().min(1, "Select a country code"),
+  followUpDate: z.date().optional(),
+  tags: z.string().optional(),
 });
 
 type LeadFormValues = z.infer<typeof leadSchema>;
 
-const LeadsFormModal = ({
-  open,
-  onOpenChange,
-}: {
+const availableTags = [
+  { value: "hot", label: "Hot" },
+  { value: "warm", label: "Warm" },
+  { value: "cold", label: "Cold" },
+  { value: "priority", label: "Priority" },
+];
+
+type Props = {
+  isEdit?: boolean;
   open: boolean;
   onOpenChange: (v: boolean) => void;
-}) => {
+};
+const LeadsFormModal = ({ open, onOpenChange, isEdit }: Props) => {
   const form = useForm<LeadFormValues>({
     resolver: zodResolver(leadSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      name: "",
       email: "",
       phone: "",
-      company: "",
-      value: "",
-      source: "",
-      status: "",
-      notes: "",
+      countryCode: "IN",
+      followUpDate: new Date(),
+      tags: "",
     },
   });
 
@@ -70,185 +86,191 @@ const LeadsFormModal = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px] h-[97%] max-h-[97%] overflow-y-auto">
+      <DialogContent className="sm:max-w-[500px] h-[97%] max-h-[97%] flex flex-col overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Add New Lead</DialogTitle>
+          <DialogTitle>{isEdit ? "Edit Lead" : "Create New Lead"}</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="firstName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>First Name</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-4 h-full"
+          >
+            {/* Name */}
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-0">
+                  <FormLabel>
+                    <span className="text-red-600 text-lg translate-y-[1.5px]">
+                      *
+                    </span>
+                    <span className="-ml-1">Name:</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter Name" {...field} />
+                  </FormControl>
+                  <FormMessage className="pt-[6px]" />
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="lastName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Last Name</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            {/* Phone */}
+            <FormItem className="flex flex-col gap-0">
+              <FormLabel htmlFor="phone">
+                <span className="text-red-600 text-lg translate-y-[1.5px] inline-block">
+                  *
+                </span>
+                <span className="-ml-1">Phone:</span>
+              </FormLabel>
+              <div className="flex gap-2">
+                <FormField
+                  control={form.control}
+                  name="countryCode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Code" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="IN">IN +91</SelectItem>
+                            <SelectItem value="US">US +1</SelectItem>
+                            <SelectItem value="UK">UK +44</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
 
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormControl>
+                        <Input
+                          type="text"
+                          id="phone"
+                          placeholder="Enter phone"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </FormItem>
+
+            {/* Email */}
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
+                <FormItem className="flex flex-col gap-2">
+                  <FormLabel>Email:</FormLabel>
                   <FormControl>
-                    <Input type="email" {...field} />
+                    <Input type="email" placeholder="Enter email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
+            {/* Tags */}
             <FormField
               control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              name="tags"
+              render={({ field }) => {
+                const [open, setOpen] = useState(false);
+                const selectedValues = field.value
+                  ? field.value.split(",")
+                  : [];
 
-            <FormField
-              control={form.control}
-              name="company"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Company</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                const toggleTag = (tag: string) => {
+                  let newValues = [...selectedValues];
+                  if (newValues.includes(tag)) {
+                    newValues = newValues.filter((t) => t !== tag);
+                  } else {
+                    newValues.push(tag);
+                  }
+                  field.onChange(newValues.join(","));
+                };
 
-            <FormField
-              control={form.control}
-              name="value"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Lead Value</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      step="0.01"
-                      placeholder="0.00"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="source"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Source</FormLabel>
-                    <Select value={field.value} onValueChange={field.onChange}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select source" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="facebook">Facebook</SelectItem>
-                        <SelectItem value="linkedin">LinkedIn</SelectItem>
-                        <SelectItem value="google">Google</SelectItem>
-                        <SelectItem value="referral">Referral</SelectItem>
-                        <SelectItem value="website">Website</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
+                return (
+                  <FormItem className="flex flex-col gap-2">
+                    <FormLabel>Tags:</FormLabel>
+                    <FormControl>
+                      <Popover open={open} onOpenChange={setOpen}>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            className="w-full justify-between"
+                          >
+                            {selectedValues.length > 0
+                              ? selectedValues.join(", ")
+                              : "Select tags"}
+                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent
+                          align="start"
+                          className="w-full p-0 mr-auto"
+                        >
+                          <Command>
+                            <CommandInput placeholder="Search tags..." />
+                            <CommandList>
+                              <CommandEmpty>No tag found.</CommandEmpty>
+                              <CommandGroup>
+                                {availableTags.map((tag) => (
+                                  <CommandItem
+                                    key={tag.value}
+                                    onSelect={() => toggleTag(tag.value)}
+                                  >
+                                    <Check
+                                      className={cn(
+                                        "mr-2 h-4 w-4",
+                                        selectedValues.includes(tag.value)
+                                          ? "opacity-100"
+                                          : "opacity-0"
+                                      )}
+                                    />
+                                    {tag.label}
+                                  </CommandItem>
+                                ))}
+                              </CommandGroup>
+                            </CommandList>
+                          </Command>
+                        </PopoverContent>
+                      </Popover>
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="status"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Status</FormLabel>
-                    <Select value={field.value} onValueChange={field.onChange}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select status" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="new">New</SelectItem>
-                        <SelectItem value="contacted">Contacted</SelectItem>
-                        <SelectItem value="qualified">Qualified</SelectItem>
-                        <SelectItem value="working">Working</SelectItem>
-                        <SelectItem value="proposal-sent">
-                          Proposal Sent
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <FormField
-              control={form.control}
-              name="notes"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Notes</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Add any additional notes..."
-                      rows={3}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+                );
+              }}
             />
 
-            <div className="flex justify-end gap-3 pt-4">
-              <Button
-                type="submit"
-                className="bg-blue-600 hover:bg-blue-700 cursor-pointer"
-              >
-                Add Lead
-              </Button>
-            </div>
+            {isEdit && (
+              <>
+                <DateField form={form} label="Follow Up Date" />
+              </>
+            )}
+
+            {/* Submit */}
+            <Button
+              type="submit"
+              className="bg-blue-600 hover:bg-blue-700 cursor-pointer mt-auto"
+            >
+              {isEdit ? "Update" : "Create"}
+            </Button>
           </form>
         </Form>
       </DialogContent>
