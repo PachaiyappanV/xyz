@@ -1,7 +1,7 @@
 import { RefreshCw, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SearchBar } from "@/components/global";
-import { TagsFormModal } from ".";
+import { FieldsFormModal } from ".";
 
 const FieldsTableControls = () => {
   return (
@@ -15,7 +15,7 @@ const FieldsTableControls = () => {
         </Button>
       </div>
       <div className="flex gap-3 items-center justify-center">
-        <TagsFormModal />
+        <FieldsFormModal />
         <Button variant="outline" className="cursor-pointer">
           <RefreshCw />
         </Button>

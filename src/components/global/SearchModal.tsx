@@ -95,7 +95,7 @@ const SearchModal = ({ open, onOpenChange }: SearchModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTitle></DialogTitle>
-      <DialogContent className="max-w-lg p-0 gap-0 rounded-lg shadow-xl overflow-hidden">
+      <DialogContent className="max-w-lg p-0 gap-0 rounded-lg shadow-xl overflow-hidden left-[50%]">
         {/* Search Bar */}
         <div className="flex items-center border-b px-4 py-3 bg-blue-20">
           <Search className="h-4 w-4 text-black mr-2" />
