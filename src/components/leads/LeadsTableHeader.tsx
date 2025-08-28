@@ -20,7 +20,7 @@ const LeadsTableHeader = () => {
                   {header} <ArrowDownUp />
                 </span>
               </div>
-            ) : id === 6 ? (
+            ) : id === 5 ? (
               <span className="flex items-center gap-1">
                 <LeadsFieldsDropdown />
               </span>

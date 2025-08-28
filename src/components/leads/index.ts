@@ -6,3 +6,5 @@ export { default as LeadsFormModal } from "./LeadsFormModal";
 export { default as AddLeadsDropdown } from "./AddLeadsDropdown";
 export { default as LeadsSettingsDropdown } from "./LeadsSettingsDropdown";
 export { default as LeadsFieldsDropdown } from "./LeadsFieldsDropdown";
+export { default as UserProfilePanel } from "./UserProfilePanel";
+export { default as NoteInput } from "./NoteInput";

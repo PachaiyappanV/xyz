@@ -4,18 +4,18 @@ import { LeadsTable } from "@/components/leads";
 
 const LeadsPage = () => {
   return (
-    <div className="flex flex-col h-full gap-5">
+    <div className="flex flex-col h-full overflow-y-auto gap-5">
       <div className="flex  gap-3 [&>svg]:w-7 [&>svg]:h-7">
         <ContactRound className="text-gray-500" />
         <h1 className="text-2xl">Leads</h1>
       </div>
-      <div className="flex-1">
-        <Tabs defaultValue="all">
-          <TabsList>
+      <div className="flex-1 px-1">
+        <Tabs defaultValue="all" className="h-full">
+          <TabsList className="h-fit">
             <TabsTrigger value="all">All</TabsTrigger>
             <TabsTrigger value="follow-up">Follow Up</TabsTrigger>
           </TabsList>
-          <TabsContent value="all" className="mt-2">
+          <TabsContent value="all" className="mt-2 h-full">
             <LeadsTable />
           </TabsContent>
           <TabsContent value="follow-up">Follow up</TabsContent>

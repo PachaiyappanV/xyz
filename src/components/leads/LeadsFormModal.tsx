@@ -185,78 +185,80 @@ const LeadsFormModal = ({ open, onOpenChange, isEdit }: Props) => {
             />
 
             {/* Tags */}
-            <FormField
-              control={form.control}
-              name="tags"
-              render={({ field }) => {
-                const [open, setOpen] = useState(false);
-                const selectedValues = field.value
-                  ? field.value.split(",")
-                  : [];
+            {!isEdit && (
+              <FormField
+                control={form.control}
+                name="tags"
+                render={({ field }) => {
+                  const [open, setOpen] = useState(false);
+                  const selectedValues = field.value
+                    ? field.value.split(",")
+                    : [];
 
-                const toggleTag = (tag: string) => {
-                  let newValues = [...selectedValues];
-                  if (newValues.includes(tag)) {
-                    newValues = newValues.filter((t) => t !== tag);
-                  } else {
-                    newValues.push(tag);
-                  }
-                  field.onChange(newValues.join(","));
-                };
+                  const toggleTag = (tag: string) => {
+                    let newValues = [...selectedValues];
+                    if (newValues.includes(tag)) {
+                      newValues = newValues.filter((t) => t !== tag);
+                    } else {
+                      newValues.push(tag);
+                    }
+                    field.onChange(newValues.join(","));
+                  };
 
-                return (
-                  <FormItem className="flex flex-col gap-2">
-                    <FormLabel>Tags:</FormLabel>
-                    <FormControl>
-                      <Popover open={open} onOpenChange={setOpen}>
-                        <PopoverTrigger asChild>
-                          <Button
-                            variant="outline"
-                            role="combobox"
-                            className="w-full justify-between"
+                  return (
+                    <FormItem className="flex flex-col gap-2">
+                      <FormLabel>Tags:</FormLabel>
+                      <FormControl>
+                        <Popover open={open} onOpenChange={setOpen}>
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant="outline"
+                              role="combobox"
+                              className="w-full justify-between"
+                            >
+                              {selectedValues.length > 0
+                                ? selectedValues.join(", ")
+                                : "Select tags"}
+                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent
+                            align="start"
+                            className="w-full p-0 mr-auto"
                           >
-                            {selectedValues.length > 0
-                              ? selectedValues.join(", ")
-                              : "Select tags"}
-                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent
-                          align="start"
-                          className="w-full p-0 mr-auto"
-                        >
-                          <Command>
-                            <CommandInput placeholder="Search tags..." />
-                            <CommandList>
-                              <CommandEmpty>No tag found.</CommandEmpty>
-                              <CommandGroup>
-                                {availableTags.map((tag) => (
-                                  <CommandItem
-                                    key={tag.value}
-                                    onSelect={() => toggleTag(tag.value)}
-                                  >
-                                    <Check
-                                      className={cn(
-                                        "mr-2 h-4 w-4",
-                                        selectedValues.includes(tag.value)
-                                          ? "opacity-100"
-                                          : "opacity-0"
-                                      )}
-                                    />
-                                    {tag.label}
-                                  </CommandItem>
-                                ))}
-                              </CommandGroup>
-                            </CommandList>
-                          </Command>
-                        </PopoverContent>
-                      </Popover>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                );
-              }}
-            />
+                            <Command>
+                              <CommandInput placeholder="Search tags..." />
+                              <CommandList>
+                                <CommandEmpty>No tag found.</CommandEmpty>
+                                <CommandGroup>
+                                  {availableTags.map((tag) => (
+                                    <CommandItem
+                                      key={tag.value}
+                                      onSelect={() => toggleTag(tag.value)}
+                                    >
+                                      <Check
+                                        className={cn(
+                                          "mr-2 h-4 w-4",
+                                          selectedValues.includes(tag.value)
+                                            ? "opacity-100"
+                                            : "opacity-0"
+                                        )}
+                                      />
+                                      {tag.label}
+                                    </CommandItem>
+                                  ))}
+                                </CommandGroup>
+                              </CommandList>
+                            </Command>
+                          </PopoverContent>
+                        </Popover>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
+              />
+            )}
 
             {isEdit && (
               <>

@@ -133,3 +133,9 @@
 .bg-blue-40 {
   background-color: rgb(5, 116, 234);
 }
+
+/* For Firefox */
+* {
+  scrollbar-width: thin; /* "auto" | "thin" */
+  scrollbar-color: #a1a1aa transparent;
+}

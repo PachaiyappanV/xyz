@@ -187,7 +187,6 @@ export const leadsTableHeaders = [
   "Email",
   "Source",
   "Assigned",
-  "Actions",
   "",
 ];
 export const TagsTableHeaders = [
