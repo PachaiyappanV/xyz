@@ -63,9 +63,7 @@ const LeadsFieldsDropdown = () => {
                 checked={isChecked}
                 onCheckedChange={() => toggleField(field)}
                 disabled={isDisabled}
-                className={`data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600 ${
-                  isDisabled ? "cursor-not-allowed" : ""
-                }`}
+                className={`${isDisabled ? "cursor-not-allowed" : ""}`}
               />
               <Label
                 htmlFor={field}

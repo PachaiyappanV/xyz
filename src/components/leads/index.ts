@@ -8,3 +8,4 @@ export { default as LeadsSettingsDropdown } from "./LeadsSettingsDropdown";
 export { default as LeadsFieldsDropdown } from "./LeadsFieldsDropdown";
 export { default as UserProfilePanel } from "./UserProfilePanel";
 export { default as NoteInput } from "./NoteInput";
+export { default as LeadsFilter } from "./LeadsFilter";

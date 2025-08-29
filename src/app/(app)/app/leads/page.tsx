@@ -18,7 +18,20 @@ const LeadsPage = () => {
           <TabsContent value="all" className="mt-2 h-full">
             <LeadsTable />
           </TabsContent>
-          <TabsContent value="follow-up">Follow up</TabsContent>
+          <TabsContent value="follow-up" className=" h-full">
+            <Tabs defaultValue="today" className="h-full">
+              <TabsList className="h-fit flex justify-center items-center ">
+                <TabsTrigger value="today">Todays Followups</TabsTrigger>
+                <TabsTrigger value="pending">Pending Followups</TabsTrigger>
+              </TabsList>
+              <TabsContent value="today" className="mt-2 h-full">
+                <LeadsTable followUp={true} />
+              </TabsContent>
+              <TabsContent value="pending" className="mt-2 h-full">
+                <LeadsTable followUp={true} />
+              </TabsContent>
+            </Tabs>
+          </TabsContent>
         </Tabs>
       </div>
     </div>

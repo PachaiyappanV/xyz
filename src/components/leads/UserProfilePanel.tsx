@@ -23,8 +23,9 @@ type Props = {
     assigned: string;
   };
   setOpen: (open: boolean) => void;
+  followUp?: boolean;
 };
-export default function UserProfilePanel({ lead, setOpen }: Props) {
+export default function UserProfilePanel({ lead, setOpen, followUp }: Props) {
   const [currentView, setCurrentView] = useState<ViewType>("main");
   const [openModal, setOpenModal] = useState(false);
 
@@ -38,7 +39,11 @@ export default function UserProfilePanel({ lead, setOpen }: Props) {
 
   return (
     <>
-      <aside className="w-[350px] max-h-[560px] border p-[2px] rounded-lg  flex flex-col shadow">
+      <aside
+        className={`w-[350px] ${
+          followUp ? "max-h-[500px]" : "max-h-[560px]"
+        } border p-[2px] rounded-lg  flex flex-col shadow`}
+      >
         {currentView === "main" && (
           <div className="flex-1 pl-4 pr-2 py-2 overflow-y-auto space-y-9">
             {/* Header */}
